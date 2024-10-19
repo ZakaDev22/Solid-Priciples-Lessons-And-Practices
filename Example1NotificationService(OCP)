@@ -1,0 +1,83 @@
+
+using System;
+
+namespace Solid_Principles_Lessons
+{
+
+
+    public class Example1NotificationServiceOCP
+    {
+
+        public interface INotification
+        {
+            public void Send(string To, string Message);
+        }
+
+        public class EmailService : INotification
+        {
+            public void Send(string To, string Message)
+            {
+                Console.WriteLine($"\n Sending Email To {To} , Message : {Message}");
+
+                Console.WriteLine($""""
+                                    
+                                   koko {12}
+
+                                   """");
+            }
+        }
+
+        public class SMSService : INotification
+        {
+            public void Send(string To, string Message)
+            {
+                Console.WriteLine($"\n Sending SMS To {To} , Message : {Message}");
+            }
+        }
+
+        public class FaxService : INotification
+        {
+            public void Send(string To, string Message)
+            {
+                Console.WriteLine($"\n Sending Fax To {To} , Message : {Message}");
+            }
+        }
+
+        public class NotificationServices
+        {
+            private INotification _INotification;
+
+            public NotificationServices(INotification iNotification)
+            {
+                _INotification = iNotification;
+            }
+
+            public void SendNotification(string To, string Message)
+            {
+                _INotification.Send(To, Message);
+            }
+
+        }
+
+        static void Main(string[] args)
+        {
+            NotificationServices EmailNotificatoinService = new NotificationServices(new EmailService());
+
+            EmailNotificatoinService.SendNotification("zaka@gmail.com", "Valid Email");
+
+            NotificationServices SMSNotificatoinService = new NotificationServices(new SMSService());
+
+            SMSNotificatoinService.SendNotification("02838229", "Valid Number");
+
+
+            NotificationServices FaxNotificatoinService = new NotificationServices(new FaxService());
+
+            FaxNotificatoinService.SendNotification("05728382", "Valid Fax Message");
+
+
+
+            Console.ReadKey();
+
+        }
+    }
+}
