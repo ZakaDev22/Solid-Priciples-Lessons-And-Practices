@@ -1,0 +1,78 @@
+
+using System;
+
+namespace Homework_2___Payment_Service_OCP
+{
+    internal class Program
+    {
+        public interface IPayments
+        {
+            public void Pay(decimal Amount);
+        }
+
+        public class PaymentServices
+        {
+            private IPayments _Payment;
+
+            public PaymentServices(IPayments Payment)
+            {
+                _Payment = Payment;
+            }
+
+            public void Pay(decimal Amount)
+            {
+                _Payment.Pay(Amount);
+            }
+        }
+
+        public class PayPalService : IPayments
+        {
+            public void Pay(decimal Amount)
+            {
+                Console.WriteLine($"\n Success , You Payment Using Paypal Service Is Valid With Amount OF {Amount} $");
+            }
+        }
+
+        public class CreditCardService : IPayments
+        {
+            public void Pay(decimal Amount)
+            {
+                Console.WriteLine($"\n Success , You Payment Using Credit Card Service Is Valid With Amount OF {Amount} $");
+            }
+        }
+
+        public class BankTransferService : IPayments
+        {
+            public void Pay(decimal Amount)
+            {
+                Console.WriteLine($"\n Success , You Payment Using Bank Transfer Service Is Valid With Amount OF {Amount} $");
+            }
+        }
+
+        public class BitcoinService : IPayments
+        {
+            public void Pay(decimal Amount)
+            {
+                Console.WriteLine($"\n Success , You Payment Using Bitcoin Service Is Valid With Amount OF {Amount} $");
+            }
+        }
+
+
+        static void Main(string[] args)
+        {
+            PaymentServices Payment = new PaymentServices(new PayPalService());
+            Payment.Pay(200.00M);
+
+            Payment = new PaymentServices(new CreditCardService());
+            Payment.Pay(120.00M);
+
+            Payment = new PaymentServices(new BankTransferService());
+            Payment.Pay(300.00M);
+
+            Payment = new PaymentServices(new BitcoinService());
+            Payment.Pay(1.00M);
+
+            Console.ReadKey();
+        }
+    }
+}
