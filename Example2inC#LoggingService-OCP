@@ -1,0 +1,73 @@
+
+
+using System;
+
+namespace Example2inC_Logging_Service
+{
+    internal class Program
+    {
+
+
+        public interface ILoging
+        {
+            public void Log(string message);
+        }
+
+        public class DatabaseLogServices : ILoging
+        {
+            public void Log(string message)
+            {
+                Console.WriteLine($"\n Success , Message With : {message} Was Saved Successfully in Your Database");
+            }
+        }
+
+        public class FilesLogServices : ILoging
+        {
+            public void Log(string message)
+            {
+                Console.WriteLine($"\n Success , Message With : {message} Was Saved Successfully in Your Files");
+            }
+        }
+
+        public class EventViewrLogServices : ILoging
+        {
+            public void Log(string message)
+            {
+                Console.WriteLine($"\n Success , Message With : {message} Was Saved Successfully in Your Event Viewer");
+            }
+        }
+
+        public class LogServices
+        {
+            private ILoging _ILoging;
+
+            public LogServices(ILoging iLoging)
+            {
+                _ILoging = iLoging;
+            }
+
+            public void Log(string Messgae)
+            {
+                _ILoging.Log(Messgae);
+            }
+        }
+
+
+        static void Main(string[] args)
+        {
+
+            LogServices logServices = new LogServices(new DatabaseLogServices());
+
+            logServices.Log("save Zakaria ELfakhar to my Database");
+
+            logServices = new LogServices(new FilesLogServices());
+            logServices.Log("save 123 to my File System");
+
+            logServices = new LogServices(new EventViewrLogServices());
+            logServices.Log("save error at  2024-oct-19  to my Event Viewr");
+
+
+            Console.ReadKey();
+        }
+    }
+}
