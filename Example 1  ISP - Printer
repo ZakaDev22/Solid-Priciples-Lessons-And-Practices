@@ -1,0 +1,77 @@
+
+
+using System;
+
+namespace PrinterISP
+{
+    internal class Program
+    {
+        public interface IPrint
+        {
+            void Print(string text);
+        }
+
+        public interface IScan
+        {
+            void Scan();
+        }
+
+        public interface IFax
+        {
+            void Fax();
+        }
+
+        public interface ICopy
+        {
+            void Copy();
+        }
+
+        public class BasicPrinter : IPrint
+        {
+            public void Print(string Text)
+            {
+                Console.WriteLine(Text);
+            }
+        }
+
+        public class AdvancePrinter : IPrint, IScan, IFax, ICopy
+        {
+            public void Print(string Text)
+            {
+                Console.WriteLine(Text);
+            }
+
+            public void Scan()
+            {
+                Console.WriteLine("\n Starting Scan ...");
+            }
+
+            public void Fax()
+            {
+                Console.WriteLine();
+                Console.WriteLine($"""" 
+                                       Starting To Fax ...
+                                    """");
+            }
+
+            public void Copy()
+            {
+                Console.WriteLine("\n Start Copying ...");
+            }
+        }
+
+        static void Main(string[] args)
+        {
+            IPrint printer = new BasicPrinter();
+            printer.Print("\n\nHi My Name Is Zakaria...");
+
+            AdvancePrinter advicePrinter = new AdvancePrinter();
+            advicePrinter.Print("\n\nHi This Is me From My Advince Printer");
+            advicePrinter.Scan();
+            advicePrinter.Fax();
+            advicePrinter.Copy();
+
+            Console.ReadKey();
+        }
+    }
+}
