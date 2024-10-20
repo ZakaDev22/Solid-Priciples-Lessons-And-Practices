@@ -1,0 +1,64 @@
+
+using System;
+
+namespace Example_1_Bird___LSP
+{
+    internal class Program
+    {
+        public class Bird
+        {
+            public virtual void Eat()
+            {
+                Console.WriteLine("\n Bird Eating ...");
+            }
+
+
+        }
+
+        public class FlyingBirds : Bird
+        {
+            public virtual void Fly()
+            {
+                Console.WriteLine("\n Bird Flying ...");
+            }
+        }
+
+        public class Eagle : FlyingBirds
+        {
+            public override void Eat()
+            {
+                Console.WriteLine("\n Eagle Eating ...");
+            }
+
+            public override void Fly()
+            {
+                Console.WriteLine("\n Eagle Flying ...");
+            }
+        }
+
+        public class chicken : Bird
+        {
+            public override void Eat()
+            {
+                Console.WriteLine("\n chicken is Eating ...");
+            }
+
+
+        }
+
+
+        static void Main(string[] args)
+        {
+            FlyingBirds bird = new Eagle();
+            Bird bird1 = new chicken();
+
+            bird.Eat();
+            bird.Fly();
+
+            bird1.Eat();
+
+
+            Console.ReadKey();
+        }
+    }
+}
