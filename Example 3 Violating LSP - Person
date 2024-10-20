@@ -1,0 +1,70 @@
+
+
+using System;
+
+namespace Example_3_Violating_LSP___Person
+{
+    internal class Program
+    {
+        public class Person
+        {
+            public virtual void SendEmail()
+            {
+                Console.WriteLine("Sending Email ...");
+            }
+        }
+
+
+        public class Employee : Person
+        {
+
+            public virtual void PaySalary()
+            {
+                Console.WriteLine("Pay Employee Salary...");
+            }
+
+            public override void SendEmail()
+            {
+                Console.WriteLine("Send Email To Employee...");
+            }
+        }
+
+        public class Manager : Employee
+        {
+            public override void PaySalary()
+            {
+                Console.WriteLine("Pay Manager Salary...");
+            }
+
+            public override void SendEmail()
+            {
+                Console.WriteLine("Send Email To Manager...");
+            }
+        }
+
+        public class Student : Person
+        {
+            public override void SendEmail()
+            {
+                Console.WriteLine("Send Email To Student ...");
+            }
+        }
+
+
+        static void Main(string[] args)
+        {
+            Person student = new Student();
+            student.SendEmail();
+
+            Employee Employee = new Employee();
+            Employee.SendEmail();
+            Employee.PaySalary();
+
+            Manager Manager = new Manager();
+            Manager.SendEmail();
+            Manager.PaySalary();
+
+            Console.ReadKey();
+        }
+    }
+}
