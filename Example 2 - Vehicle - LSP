@@ -1,0 +1,58 @@
+
+using System;
+
+namespace Example_2___Vehicle___LSP
+{
+    internal class Program
+    {
+        public class Vehicle
+        {
+            public virtual void Drive()
+            {
+                Console.WriteLine("Start Driving ...");
+            }
+        }
+
+        public class VehiclesWithEngine : Vehicle
+        {
+            public virtual void StartEngine()
+            {
+                Console.WriteLine("Start Engine ...");
+            }
+        }
+
+        public class car : VehiclesWithEngine
+        {
+            public override void Drive()
+            {
+                Console.WriteLine("Start Driving My Car ...");
+            }
+
+            public override void StartEngine()
+            {
+                Console.WriteLine("Start Engine My Car...");
+            }
+        }
+
+        public class Bicycle : Vehicle
+        {
+            public override void Drive()
+            {
+                Console.WriteLine("Starting Drive My Bicycle...");
+            }
+        }
+
+        static void Main(string[] args)
+        {
+            car v = new car();
+            Bicycle v2 = new Bicycle();
+
+            v.Drive();
+            v.StartEngine();
+
+            v2.Drive();
+
+            Console.ReadKey();
+        }
+    }
+}
