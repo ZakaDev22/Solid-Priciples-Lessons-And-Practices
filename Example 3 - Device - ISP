@@ -1,0 +1,95 @@
+
+using System;
+
+namespace Example_3___Device___ISP
+{
+    internal class Program
+    {
+        public interface IPhoto
+        {
+            void TakePhoto();
+        }
+
+        public interface ICall
+        {
+            void MakeCall();
+        }
+
+        public interface IEmail
+        {
+            void SendEmail();
+        }
+
+        public interface IGBS
+        {
+            void UseGPS();
+        }
+
+        public class clsNormalPhone : ICall, IEmail
+        {
+            public void SendEmail()
+            {
+                Console.WriteLine("\n Sending Email From Normal Phone...");
+            }
+
+            public void MakeCall()
+            {
+                Console.WriteLine("\n Making Call From Normal Phone...");
+            }
+        }
+
+        public class clsSmartPhone : ICall, IEmail, IPhoto, IGBS
+        {
+            public void SendEmail()
+            {
+                Console.WriteLine("\n Sending Email From Smart Phone...");
+            }
+
+            public void MakeCall()
+            {
+                Console.WriteLine("\n Making Call From Smart Phone...");
+            }
+
+            public void UseGPS()
+            {
+                Console.WriteLine("\n Using GPS From Smart Phone...");
+            }
+
+            public void TakePhoto()
+            {
+                Console.WriteLine("\n Taking Photo From Smart Phone...");
+            }
+        }
+
+        public class clsNormalComputer : IEmail
+        {
+            public void SendEmail()
+            {
+                Console.WriteLine("\n Sending Email From Computer...");
+            }
+        }
+
+        static void Main(string[] args)
+        {
+            Console.WriteLine("\n ----------Normal Phone ---------");
+            clsNormalPhone phone = new clsNormalPhone();
+            phone.SendEmail();
+            phone.MakeCall();
+
+            Console.WriteLine();
+            Console.WriteLine("\n ----------Computer---------");
+            clsNormalComputer NormalComputer = new clsNormalComputer();
+            NormalComputer.SendEmail();
+
+            Console.WriteLine();
+            Console.WriteLine("\n ----------Smart Phone---------");
+            clsSmartPhone smartPhone = new clsSmartPhone();
+            smartPhone.SendEmail();
+            smartPhone.MakeCall();
+            smartPhone.TakePhoto();
+            smartPhone.UseGPS();
+
+            Console.ReadKey();
+        }
+    }
+}
