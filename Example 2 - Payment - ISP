@@ -1,0 +1,87 @@
+
+
+using System;
+
+namespace Example_2_Payment_ISP
+{
+    public class Program
+    {
+        public interface ICreditCard
+        {
+            void PayWithCreditCard();
+        }
+
+        public interface IPaypal
+        {
+            void PayWithPaypal();
+        }
+
+        public interface IBitcoin
+        {
+            void PayWithBitcoin();
+        }
+
+        public class clsCreditCard : ICreditCard
+        {
+            public void PayWithCreditCard()
+            {
+                Console.WriteLine("Payment With Credit Card ...");
+            }
+        }
+
+        public class clsPaypal : IPaypal
+        {
+            public void PayWithPaypal()
+            {
+                Console.WriteLine("Payment With PayWithPaypal Card ...");
+            }
+        }
+
+        public class clsBitcoin : IBitcoin
+        {
+            public void PayWithBitcoin()
+            {
+                Console.WriteLine("Payment With PayWithBitcoin Card ...");
+            }
+        }
+
+        public class clsAllPayments : IBitcoin, IPaypal, ICreditCard
+        {
+            public void PayWithCreditCard()
+            {
+                Console.WriteLine("Payment With Credit Card ...");
+            }
+
+            public void PayWithPaypal()
+            {
+                Console.WriteLine("Payment With PayWithPaypal Card ...");
+            }
+
+            public void PayWithBitcoin()
+            {
+                Console.WriteLine("Payment With PayWithBitcoin Card ...");
+            }
+        }
+
+        static void Main(string[] args)
+        {
+            IPaypal p = new clsPaypal();
+            p.PayWithPaypal();
+
+            ICreditCard c = new clsCreditCard();
+            c.PayWithCreditCard();
+
+            IBitcoin bitcoin = new clsBitcoin();
+            bitcoin.PayWithBitcoin();
+
+            Console.WriteLine();
+
+            clsAllPayments AllPayments = new clsAllPayments();
+            AllPayments.PayWithCreditCard();
+            AllPayments.PayWithBitcoin();
+            AllPayments.PayWithPaypal();
+
+            Console.ReadKey();
+        }
+    }
+}
