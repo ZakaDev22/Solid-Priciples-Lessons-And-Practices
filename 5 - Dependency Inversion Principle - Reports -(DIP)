@@ -1,0 +1,67 @@
+
+using System;
+
+namespace _5___Dependency_Inversion_Principle___Generate_Report____DIP_
+{
+    internal class Program
+    {
+        public interface IReporteGenerator
+        {
+            void Generate();
+        }
+
+        public class clsPdfReportGenerator : IReporteGenerator
+        {
+            public void Generate()
+            {
+                Console.WriteLine("\n PDF Report Generator ....");
+            }
+        }
+
+        public class clsWordReportGenerator : IReporteGenerator
+        {
+            public void Generate()
+            {
+                Console.WriteLine("\n Word Report Generator ....");
+            }
+        }
+
+        public class clsExcelReportGenerator : IReporteGenerator
+        {
+            public void Generate()
+            {
+                Console.WriteLine("\n Excel Report Generator ....");
+            }
+        }
+
+        public class clsReportGenerator : IReporteGenerator
+        {
+            private IReporteGenerator _generator;
+
+            public clsReportGenerator(IReporteGenerator generator)
+            {
+                _generator = generator;
+            }
+
+            public void Generate()
+            {
+                _generator.Generate();
+            }
+        }
+
+        static void Main(string[] args)
+        {
+            IReporteGenerator generator = new clsReportGenerator(new clsPdfReportGenerator());
+            generator.Generate();
+
+            generator = new clsReportGenerator(new clsWordReportGenerator());
+            generator.Generate();
+
+            generator = new clsReportGenerator(new clsExcelReportGenerator());
+            generator.Generate();
+
+
+            Console.ReadKey();
+        }
+    }
+}
